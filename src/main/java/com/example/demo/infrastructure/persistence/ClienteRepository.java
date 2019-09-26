@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 public class ClienteRepository implements IClienteRepository {
 
     public Cliente getCliente(Cliente cliente){
-        cliente.setName("Name consultado");
-        cliente.setValue("Valor consultado");
+        cliente.setName("Guardado: "+cliente.getName());
+        cliente.setValue("Guardado: "+cliente.getValue());
         return cliente;
     }
 

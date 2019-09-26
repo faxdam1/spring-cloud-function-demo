@@ -5,10 +5,9 @@ import com.example.demo.domain.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
-
-
 import java.util.function.Function;
 
 /**
@@ -23,15 +22,16 @@ public class ClienteController {
 
     @Bean("guardar")
     public Function<Message<Cliente>, Message<Cliente>> guardarCliente() {
-
         return value -> MessageBuilder.
                 createMessage(
-                        clienteService.getCliente(value.getPayload()),value.getHeaders()
+                        clienteService.getCliente(value.getPayload()), value.getHeaders()
                 );
     }
 
-
-
+    @Bean("saludar")
+    public Function<Message<String>, Message<String>> saludarCliente() {
+        return value -> new GenericMessage("Hola: " + value.getPayload());
+    }
 
 }
 
