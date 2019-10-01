@@ -1,7 +1,6 @@
 package com.example.demo.application;
 
-import com.example.demo.domain.model.Cliente;
-import com.example.demo.domain.service.ClienteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
@@ -17,20 +16,12 @@ import java.util.function.Function;
 @Component
 public class ClienteController {
 
-    @Autowired
-    ClienteService clienteService;
-
-    @Bean("guardar")
-    public Function<Message<Cliente>, Message<Cliente>> guardarCliente() {
-        return value -> MessageBuilder.
-                createMessage(
-                        clienteService.getCliente(value.getPayload()), value.getHeaders()
-                );
-    }
-
-    @Bean("saludar")
-    public Function<Message<String>, Message<String>> saludarCliente() {
-        return value -> new GenericMessage("Hola: " + value.getPayload());
+    @Bean("downFiles")
+    public Function<String, String> downFiles() {
+        return value -> {
+            System.out.println("Hello: " + value);
+            return "Hello: " + value;
+        };
     }
 
 }
